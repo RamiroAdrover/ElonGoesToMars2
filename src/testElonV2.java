@@ -9,28 +9,25 @@ public class testElonV2 {
     static int elements;
 
     public static void main(String[] args){
+
         //System.out.println("Ingresar cantidad de casos de prueba");
+
         Scanner scanner = new Scanner(System.in);
         testCases = scanner.nextInt();
-
         for (int i = 0; i< testCases; i++) {
+
             //System.out.println("Ingresar cantidad de elementos y peso total");
+
             elements = scanner.nextInt();
             weight = scanner.nextLong();
-            getObjects(elements, weight);
-            //scanner = new Scanner(System.in);;
+            items = new long[elements+1];
             for(int j=1;j<elements+1;j++){
                 items[j] = scanner.nextLong();
+                //System.out.println("nro "+items[j]);
             }
-        }
-    }
+            getObjects(elements, weight);
 
-    protected static long[] getInts(String[] array){
-        long[] result= new long[array.length+1];
-        for(int i =1; i< array.length+1;i++){
-            result[i] = Long.parseLong(array[i-1]);
         }
-        return result;
     }
     protected static void setMinWeight(long weight){
         minWeight = (int) Math.ceil(weight/2);
@@ -39,12 +36,7 @@ public class testElonV2 {
         return ((weightAccumulator>=minWeight)&&(weightAccumulator<=weight));
     }
     protected static void getObjects(int elementsCount, long weight){
-
-        items = new long[elementsCount+1];
         //System.out.println("Ingrese pesos separados por un espacio");
-
-        //String[] weights = scanner.nextLine().split(" ");;
-        //items = getInts(weights);
 
         int[] positions = new int[elementsCount+1];
         int currentFilledPositions = 0;
@@ -52,9 +44,7 @@ public class testElonV2 {
         int index = 1;
         setMinWeight(weight);
         while(!onRange(weightAccumulator) && index<elementsCount+1){
-            //System.out.println("item: "+items[index]);
             if(items[index]+weightAccumulator<=weight){
-                //System.out.println("entro");
                 currentFilledPositions++;
                 weightAccumulator+=items[index];
                 positions[currentFilledPositions] = index;
@@ -66,6 +56,7 @@ public class testElonV2 {
             for(int i = 1; ((i<elementsCount+1) && (positions[i] != 0)); i++) {
                 System.out.print(positions[i]+" ");
             }
+            System.out.println();
         }else{
             System.out.println(-1);
         }
